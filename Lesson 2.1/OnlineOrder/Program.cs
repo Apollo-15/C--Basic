@@ -9,9 +9,9 @@ public class Program
     {
         Console.WriteLine("Hello! What would you like to do?");
 
-        bool running = true;
+        bool isRunning = true;
 
-        while (running)
+        while (isRunning)
         {
             Console.WriteLine("\nSelect an action:");
             Console.WriteLine("1. Create an order");
@@ -20,8 +20,8 @@ public class Program
             Console.WriteLine("4. Exit");
             Console.Write("Your choise: ");
 
-            string choise = Console.ReadLine();
-            switch (choise)
+            string choice = Console.ReadLine();
+            switch (choice)
             {
                 case "1":
                     CreateOrder();
@@ -36,7 +36,7 @@ public class Program
                     break;
 
                 case "4":
-                    running = false;
+                    isRunning = false;
                     Console.WriteLine("Exiting the program...");
                     break;
                 default:
