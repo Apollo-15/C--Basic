@@ -6,21 +6,27 @@ namespace Cycles.Tasks
     {
         public static void Run()
         {
-            System.Console.Write("Enter the number of employees:");
-            if (!int.TryParse(System.Console.ReadLine(), out int numberOfEmployees) || numberOfEmployees <= 0)
+            int numberOfEmployees;
+
+            while (true)
             {
-                System.Console.WriteLine("Invalid input. Please enter a positive integer.");
-                return;
+                System.Console.Write("Enter the number of employees: ");
+                if (int.TryParse(System.Console.ReadLine(), out numberOfEmployees) && numberOfEmployees > 0)
+                    break;
+                else
+                    System.Console.WriteLine("Invalid input. Please enter a positive integer.");
             }
 
             decimal totalSalary = 0;
 
             for (int i = 1; i <= numberOfEmployees; i++)
             {
-                System.Console.Write($"Enter the salary for employee #{i}:");
-                if (!decimal.TryParse(Console.ReadLine(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal salary) || salary < 0)
+                System.Console.Write($"Enter the salary for employee #{i}: ");
+                string input = System.Console.ReadLine()?.Replace(',', '.');
+
+                if (!decimal.TryParse(input, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal salary) || salary < 0)
                 {
-                    Console.WriteLine("Invalid input. Please enter a non-negative number.");
+                    System.Console.WriteLine("Invalid input. Please enter a non-negative number.");
                     i--;
                     continue;
                 }
