@@ -54,6 +54,14 @@ namespace Tic_tac_toe
             board[x, y] = player;
         }
 
+        public static int GetCell(int cell)
+        {
+            int x = (cell - 1) / 3;
+            int y = (cell - 1) % 3;
+
+            return board[x, y];
+        }
+
         public static bool IsWin(int player)
         {
             for (int i = 0; i < 3; i++)
