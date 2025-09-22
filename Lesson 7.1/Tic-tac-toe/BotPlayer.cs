@@ -1,6 +1,6 @@
 namespace Tic_tac_toe
 {
-    public class BotPlayer(string name, char symbol) : Player
+    public class BotPlayer(string name, char symbol) : IPlayer
     {
         public char Symbol { get; private set; } = symbol;
         public string Name { get; private set; } = name;
@@ -17,7 +17,7 @@ namespace Tic_tac_toe
             new[] {2, 4, 6}
         };
 
-        public int ChooseCell(Board board)
+    public int ChooseCell()
         {
             int botNum = Symbol == 'X' ? 1 : 2;
             int humanNum = Symbol == 'X' ? 2 : 1;
@@ -27,12 +27,13 @@ namespace Tic_tac_toe
                 int botCount = 0, emptyCount = 0, emptyCell = -1;
                 foreach (var index in pattern)
                 {
-                    if (GetCell(board, index) == botNum)
+                    int cellIndex = index + 1;
+                    if (Board.GetCell(cellIndex) == botNum)
                         botCount++;
-                    else if (GetCell(board, index) == 0)
+                    else if (Board.GetCell(cellIndex) == 0)
                     {
                         emptyCount++;
-                        emptyCell = index;
+                        emptyCell = cellIndex;
                     }
                 }
                 if (botCount == 2 && emptyCount == 1)
@@ -44,12 +45,13 @@ namespace Tic_tac_toe
                 int humanCount = 0, emptyCount = 0, emptyCell = -1;
                 foreach (var index in pattern)
                 {
-                    if (GetCell(board, index) == humanNum)
+                    int cellIndex = index + 1;
+                    if (Board.GetCell(cellIndex) == humanNum)
                         humanCount++;
-                    else if (GetCell(board, index) == 0)
+                    else if (Board.GetCell(cellIndex) == 0)
                     {
                         emptyCount++;
-                        emptyCell = index;
+                        emptyCell = cellIndex;
                     }
                 }
                 if (humanCount == 2 && emptyCount == 1)
@@ -59,33 +61,31 @@ namespace Tic_tac_toe
             int[] priority = { 4, 0, 2, 6, 8, 1, 3, 5, 7 };
             foreach (var i in priority)
             {
-                if (board.IsCellEmpty(i))
-                    return i;
+                int cellIndex = i + 1;
+                if (Board.IsCellEmpty(cellIndex))
+                    return cellIndex;
             }
 
             var random = new Random();
             int cell;
             do
             {
-                cell = random.Next(0, 9);
-            } while (!board.IsCellEmpty(cell));
+                cell = random.Next(1, 10);
+            } while (!Board.IsCellEmpty(cell));
             return cell;
         }
 
-        private int GetCell(Board board, int index)
+        public void MakeMove()
         {
-            int x = index / 3;
-            int y = index % 3;
-            return board.GetCell(index);
-        }
-
-        public void MakeMove(Board board)
-        {
-            int cell = ChooseCell(board);
+            int cell = ChooseCell();
             int playerNumber = Symbol == 'X' ? 1 : 2;
-            board.PlaceMark(cell, playerNumber);
-            System.Console.WriteLine($"{Name} placed ({Symbol}) in cell {cell + 1}");
-
+            Board.PlaceMark(cell, playerNumber);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write($"{Name} placed (");
+            Console.Write(Symbol);
+            Console.Write($") in cell {cell}");
+            Console.ResetColor();
+            Console.WriteLine();
         }
     }
 }

@@ -6,28 +6,41 @@ namespace Tic_tac_toe
 
         public static void DisplayBoard()
         {
-            Tuple<int, int, int> max = Tuple.Create(int.MinValue, -1, -1);
-            Tuple<int, int, int> min = Tuple.Create(int.MaxValue, -1, -1);
-
             for (int x = 0; x < 3; x++)
             {
                 for (int y = 0; y < 3; y++)
                 {
+                    int cellNum = x * 3 + y + 1;
                     if (board[x, y] == 0)
                     {
-                        int number_of_cell = x * 3 + y + 1;
-                        System.Console.Write($"{number_of_cell}|");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        System.Console.Write($" {cellNum} ");
                     }
                     else if (board[x, y] == 1)
                     {
-                        System.Console.Write("X|");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        System.Console.Write(" X ");
                     }
-                    else if (board[x, y] == 2)
+                    else
                     {
-                        System.Console.Write("O|");
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        System.Console.Write(" O ");
+                    }
+                    Console.ResetColor();
+                    if (y < 2)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        System.Console.Write("|");
+                        Console.ResetColor();
                     }
                 }
-                System.Console.WriteLine("--+--+--");   
+                System.Console.WriteLine();
+                if (x < 2)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    System.Console.WriteLine("---+---+---");
+                    Console.ResetColor();
+                }
             }
         }
 

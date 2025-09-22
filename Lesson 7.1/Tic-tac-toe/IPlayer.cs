@@ -4,7 +4,7 @@ namespace Tic_tac_toe
     {
         char Symbol { get; }
         string Name { get; }
-        int ChooseCell(Board board);
-        void MakeMove(Board board);
+        int ChooseCell();
+        void MakeMove();
     }
 }
