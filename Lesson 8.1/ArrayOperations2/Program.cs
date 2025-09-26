@@ -12,11 +12,15 @@ namespace ArrayOperations2
                 { 4, 2, 6 }
             };
             int secondLargest = SecondLargestFinder(array);
+            const int INDEX_TO_REMOVE = 3; // Example index to remove
 
             System.Console.WriteLine("=====FIRST=TASK=====");
             System.Console.WriteLine($"Second largest element is: {secondLargest}");
             System.Console.WriteLine("=====SECOND=TASK=====");
             TwoDimArraySorter(twoDimArray);
+            System.Console.WriteLine("=====THIRD=TASK======");
+            System.Console.WriteLine($"Array before removing element {indexToRemove}: [{string.Join(", ", array)}]");
+            ArrayElementRemover(array, indexToRemove);
         }
 
         public static int SecondLargestFinder(int[] array)
@@ -80,6 +84,31 @@ namespace ArrayOperations2
                 }
                 System.Console.WriteLine();
             }
+        }
+
+        public static int ArrayElementRemover(int[] array, int indexToRemove)
+        {
+            if (indexToRemove < 0 || indexToRemove >= array.Length)
+            {
+                System.Console.WriteLine("Index out of bounds.");
+                return array.Length;
+            }
+
+            int[] newArray = new int[array.Length - 1];
+            int newIndex = 0;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (i != indexToRemove)
+                {
+                    newArray[newIndex++] = array[i];
+                }
+
+            }
+
+            array = newArray;
+            System.Console.WriteLine($"Array after removing element {indexToRemove}: [{string.Join(", ", array)}]");
+            return array.Length;
         }
     }  
 }
