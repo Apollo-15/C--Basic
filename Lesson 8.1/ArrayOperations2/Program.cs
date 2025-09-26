@@ -6,6 +6,12 @@ namespace ArrayOperations2
         public static void Main(string[] args)
         {
             int[] array = { 3, 4, 7, 2, 8, 6, 11, 9 }; // Largest: 3<4→4<7→7<8→8<11→11 | 11, Second largest: 3<4→4<7→7<8→8<9→9 | 9
+            int[,] unsortedTwoDimArray = {
+                { 5, 3, 7 },
+                { 1, 9, 8 },
+                { 4, 2, 6 }
+            };
+
             int[,] twoDimArray = {
                 { 5, 3, 7 },
                 { 1, 9, 8 },
@@ -17,10 +23,16 @@ namespace ArrayOperations2
             System.Console.WriteLine("=====FIRST=TASK=====");
             System.Console.WriteLine($"Second largest element is: {secondLargest}");
             System.Console.WriteLine("=====SECOND=TASK=====");
-            TwoDimArraySorter(twoDimArray);
+            TwoDimArraySorter(unsortedTwoDimArray);
             System.Console.WriteLine("=====THIRD=TASK======");
-            System.Console.WriteLine($"Array before removing element {indexToRemove}: [{string.Join(", ", array)}]");
-            ArrayElementRemover(array, indexToRemove);
+            System.Console.WriteLine($"Array before removing element {INDEX_TO_REMOVE}: [{string.Join(", ", array)}]");
+            ArrayElementRemover(array, INDEX_TO_REMOVE);
+            System.Console.WriteLine("=====FOURTH=TASK=====");
+            System.Console.WriteLine("2D array with original elements (before sorting):");
+            DiagonalSumCalculator(twoDimArray);
+            System.Console.WriteLine("=====================");
+            System.Console.WriteLine("2D array after sorting:");
+            DiagonalSumCalculator(unsortedTwoDimArray);
         }
 
         public static int SecondLargestFinder(int[] array)
@@ -107,8 +119,29 @@ namespace ArrayOperations2
             }
 
             array = newArray;
-            System.Console.WriteLine($"Array after removing element {indexToRemove}: [{string.Join(", ", array)}]");
+            System.Console.WriteLine($"Array after removing element {indexToRemove}: [{string.Join(", ", newArray)}]");
             return array.Length;
+        }
+
+        public static int DiagonalSumCalculator(int[,] array)
+        {
+            int rows = array.GetLength(0);
+            int columns = array.GetLength(1);
+
+            if (rows != columns)
+            {
+                System.Console.WriteLine("Array must be square to calculate the diagonal sum.");
+                return 0;
+            }
+
+            int diagonalSum = 0;
+
+            for (int i = 0; i < rows; i++)
+            {
+                diagonalSum += array[i, i];
+            }
+            System.Console.WriteLine($"Sum of diagonal elements: {diagonalSum}");
+            return diagonalSum;
         }
     }  
 }
