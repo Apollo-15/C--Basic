@@ -1,18 +1,19 @@
 ﻿using System;
-namespace SpaceRemover;
-
-public class Program
+namespace SpaceRemover
 {
-    public static void Main(string[] args)
+    public class Program
     {
-        System.Console.InputEncoding = System.Text.Encoding.Unicode;
-        System.Console.OutputEncoding = System.Text.Encoding.Unicode;
+        public static void Main(string[] args)
+        {
+            System.Console.InputEncoding = System.Text.Encoding.Unicode;
+            System.Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-        System.Console.Write("Enter a string with spaces and commas: ");
-        string input = System.Console.ReadLine();
+            System.Console.Write("Enter a string with spaces and commas: ");
+            string input = System.Console.ReadLine();
 
-        string result = input.Replace(" ", "");
-        System.Console.WriteLine($"String without spaces: {result}");
+            string result = input.Replace(" ", "");
+            System.Console.WriteLine($"String without spaces: {result}");
 
+        }
     }
 }
