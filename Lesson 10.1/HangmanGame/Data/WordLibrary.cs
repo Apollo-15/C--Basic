@@ -91,10 +91,10 @@ namespace HangmanGame.Data
             return new List<string>();
         }
 
-        public string GetRandomWord(string category, int wordLength)
+        public string GetRandomWord(string category, int minLength, int maxLength)
         {
             var filteredWords = Words.ContainsKey(category) ?
-                Words[category].Where(w => w.Length == wordLength).ToList() :
+                Words[category].Where(w => w.Length >= minLength && w.Length <= maxLength).ToList() :
                 new List<string>();
 
             if (filteredWords.Count == 0)
