@@ -10,6 +10,7 @@ namespace HangmanGame.Models
         public int MaxAttempts { get; set; }
         public string Theme { get; set; }
         public bool SoundEnabled { get; set; }
+        public int Volume { get; set; } = 5;
     }
 
     public enum DifficultLevel
