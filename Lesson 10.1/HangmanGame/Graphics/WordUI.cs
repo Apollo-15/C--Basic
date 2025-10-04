@@ -9,7 +9,7 @@ namespace HangmanGame.Graphics
         public void Draw(string word, List<char> guessedLetters)
         {
             System.Console.ForegroundColor = ConsoleColor.Blue;
-            System.Console.WriteLine("\n=====Word to guess=====\n");
+            System.Console.WriteLine("\n===============Word==to==guess===============\n");
 
             string display = "";
             foreach (char c in word)

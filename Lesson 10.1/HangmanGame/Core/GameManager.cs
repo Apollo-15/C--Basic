@@ -39,6 +39,7 @@ namespace HangmanGame.Core
 
         public void StartGame()
         {
+            System.Console.Clear();
             guessedLetters = new List<char>();
             remainingAttempts = settings.MaxAttempts;
             isGameOver = false;
@@ -47,11 +48,11 @@ namespace HangmanGame.Core
 
             if (word == null)
             {
-                Console.WriteLine("Error: word was not generated!");
+                System.Console.WriteLine("Error: word was not generated!");
                 return;
             }
 
-            Console.WriteLine($"Word has been chosen! Starting the game... (Category: {category})");
+            System.Console.WriteLine($"Word has been chosen! Starting the game... (Category: {category})");
             timer.Start();
             RunGameLoop();
         }
@@ -109,6 +110,7 @@ namespace HangmanGame.Core
 
         public void CategoryMenu()
         {
+            System.Console.Clear();
             System.Console.ForegroundColor = System.ConsoleColor.Yellow;
             System.Console.WriteLine("\n=====Category=List=====");
             System.Console.ResetColor();
@@ -136,6 +138,7 @@ namespace HangmanGame.Core
         
         private void HumanPick()
         {
+            System.Console.Clear();
             var categories = library.GetCategories();
             for (int i = 0; i < categories.Count; i++)
             {
@@ -157,6 +160,7 @@ namespace HangmanGame.Core
 
         private void BotPick()
         {
+            System.Console.Clear();
             var categories = library.GetCategories();
             category = categories[random.Next(categories.Count())];
             word = library.GetRandomWord(category, settings.MinLength, settings.MaxLength);

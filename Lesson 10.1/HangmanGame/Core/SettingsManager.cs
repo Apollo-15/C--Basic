@@ -22,6 +22,7 @@ namespace HangmanGame.Core
 
         public void OpenMenu()
         {
+            System.Console.Clear();
             System.Console.ForegroundColor = System.ConsoleColor.Cyan;
             System.Console.WriteLine("\n=====Settings=List=====");
             System.Console.ResetColor();
@@ -49,6 +50,7 @@ namespace HangmanGame.Core
 
         public void DifficultyMenu()
         {
+            System.Console.Clear();
             System.Console.ForegroundColor = System.ConsoleColor.Yellow;
             System.Console.WriteLine("\n=====Difficulty=List=====");
             System.Console.ResetColor();
@@ -98,6 +100,7 @@ namespace HangmanGame.Core
 
         public void SoundMenu()
         {
+            System.Console.Clear();
             System.Console.ForegroundColor = System.ConsoleColor.Yellow;
             System.Console.WriteLine("=====Sound=Settings=====");
             System.Console.ResetColor();
