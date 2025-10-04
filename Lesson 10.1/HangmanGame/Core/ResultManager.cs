@@ -1,12 +1,18 @@
 using System;
-using HangmanGame.Core;
 using HangmanGame.Models;
 using System.Collections.Generic;
 
-namespace HangmanGame
+namespace HangmanGame.Core
 {
     public class ResultManager
     {
+        private readonly SoundManager soundManager;
+
+        public ResultManager(SoundManager soundManager)
+        {
+            this.soundManager = soundManager;
+        }
+
         public void ShowResult(string word, List<char> guessedLetters, int remainingAttempts, TimerManager timer, DifficultLevel difficulty)
         {
             TimeSpan duration = timer.GetElapsed();
@@ -19,11 +25,17 @@ namespace HangmanGame
 
             if (remainingAttempts > 0)
             {
+                soundManager.PlayWin();
+                soundManager.Wait(3500);
+                soundManager.PlayWordCompleted();
                 System.Console.ForegroundColor = System.ConsoleColor.Green;
                 System.Console.WriteLine("Congratulations! You won!");
             }
             else
             {
+                soundManager.PlayLoose();
+                soundManager.Wait(200);
+                soundManager.PlayGameOver();
                 System.Console.ForegroundColor = System.ConsoleColor.Red;
                 System.Console.WriteLine("You lost. Better luck next time!");
             }

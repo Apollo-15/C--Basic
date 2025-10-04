@@ -17,6 +17,7 @@ namespace HangmanGame.Menu
 
         public void ShowMainMenu()
         {
+            soundManager.PlayMenuMusic();
             System.Console.Clear();
             System.Console.ForegroundColor = System.ConsoleColor.DarkGreen;
             System.Console.Write("\x1b[1m");
@@ -51,7 +52,7 @@ namespace HangmanGame.Menu
             System.Console.Write("\x1b[1m");
             System.Console.WriteLine("\n Select an option (1-4): ");
             string choice = System.Console.ReadLine();
-            soundManager.PlayKeyPress();
+            soundManager.PlayMenuOpen();
             System.Console.Write("\x1b[0m");
             System.Console.ResetColor();
 
@@ -67,6 +68,7 @@ namespace HangmanGame.Menu
                 case "3": ShowSettings(); break;
                 case "4": ExitGame(); break;
                 default:
+                    soundManager.PlayMenuInvalid();
                     System.Console.ForegroundColor = System.ConsoleColor.Red;
                     System.Console.Write("\x1b[1m");
                     System.Console.WriteLine("Invalid choice. Please select a valid option.");
@@ -79,6 +81,7 @@ namespace HangmanGame.Menu
 
         public void StartNewGame()
         {
+            soundManager.StopMenuMusic();
             System.Console.Clear();
             System.Console.ForegroundColor = System.ConsoleColor.Green;
             System.Console.WriteLine("Starting a new game...");
@@ -102,7 +105,7 @@ namespace HangmanGame.Menu
             System.Console.Write("Press Enter to return to the main menu...");
             System.Console.ResetColor();
             System.Console.ReadLine();
-            soundManager.PlayKeyPress();
+            soundManager.PlayMenuSelect();
             ShowMainMenu();
         }
 

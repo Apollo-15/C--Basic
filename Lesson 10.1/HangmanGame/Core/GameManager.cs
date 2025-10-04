@@ -98,20 +98,22 @@ namespace HangmanGame.Core
                     letterStates[ToGuess] = "wrong";
                     remainingAttempts--;
                     soundManager.PlayWrongLetter();
+                    soundManager.Wait(800);
+                    soundManager.PlayWriting();
                 }
 
                 if (word.All(c => guessedLetters.Contains(Char.ToUpper(c))) || remainingAttempts <= 0)
                 {
                     isGameOver = true;
-
                     string finalWordState = new string(word.Select(c => guessedLetters.Contains(char.ToUpper(c)) ? c : '_').ToArray());
                     frameRenderer.Render(finalWordState, remainingAttempts, letterStates, timer, guessedLetters, category, settings.Difficulty);
                 }
             }
 
             timer.Stop();
+            timer.Stop();
 
-            ResultManager resultManager = new ResultManager();
+            ResultManager resultManager = new ResultManager(soundManager);
             resultManager.ShowResult(word, guessedLetters, remainingAttempts, timer, settings.Difficulty);
 
             bool validChoice = false;
@@ -121,21 +123,25 @@ namespace HangmanGame.Core
                 switch (action)
                 {
                     case "1":
+                        soundManager.PlayMenuSelect();
                         validChoice = true;
                         MenuManager menu = new MenuManager(soundManager, settings);
                         menu.ShowMainMenu();
                         break;
                     case "2":
+                        soundManager.PlayMenuSelect();
                         validChoice = true;
                         guessedLetters = new List<char>();
                         letterStates.Clear();
                         StartGame();
                         break;
                     case "3":
+                        soundManager.PlayMenuSelect();
                         validChoice = true;
                         System.Environment.Exit(0);
                         break;
                     default:
+                        soundManager.PlayMenuInvalid();
                         System.Console.WriteLine("Invalid choice. Enter 1, 2 or 3.");
                         action = resultManager.GetNextAction();
                         break;

@@ -37,14 +37,18 @@ namespace HangmanGame.Core
             System.Console.ResetColor();
 
             string choice = System.Console.ReadLine();
-            soundManager.PlayKeyPress();
+            soundManager.PlayMenuOpen();
 
             switch (choice)
             {
                 case "1": DifficultyMenu(); break;
                 case "2": SoundMenu(); break;
                 case "3": menuManager.ShowMainMenu(); break;
-                default: System.Console.WriteLine("Invalid number. Please, input number from from 1 to 3"); break;
+                default:
+                    soundManager.PlayMenuInvalid();
+                    System.Console.WriteLine("Invalid number. Please, input number from from 1 to 3");
+                    OpenMenu();
+                    break;
             }
         }
 
@@ -68,7 +72,7 @@ namespace HangmanGame.Core
             System.Console.ResetColor();
 
             string choice = System.Console.ReadLine();
-            soundManager.PlayKeyPress();
+            soundManager.PlayMenuSelect();
 
             switch (choice)
             {
@@ -94,7 +98,11 @@ namespace HangmanGame.Core
                     OpenMenu();
                     break;
                 case "4": OpenMenu(); break;
-                default: System.Console.WriteLine("Invalid number. Please, input number from from 1 to 4"); break;
+                default:
+                    soundManager.PlayMenuInvalid();
+                    System.Console.WriteLine("Invalid number. Please, input number from from 1 to 4");
+                    DifficultyMenu();
+                    break;
             }
         }
 
@@ -118,7 +126,7 @@ namespace HangmanGame.Core
             System.Console.ResetColor();
 
             string choice = System.Console.ReadLine();
-            soundManager.PlayKeyPress();
+            soundManager.PlayMenuSelect();
 
             switch (choice)
             {
@@ -148,6 +156,7 @@ namespace HangmanGame.Core
                     break;
                 case "4": OpenMenu(); break;
                 default:
+                    soundManager.PlayMenuInvalid();
                     System.Console.WriteLine("Invalid number. Please, input number from from 1 to 4");
                     SoundMenu();
                     break;
