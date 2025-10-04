@@ -27,7 +27,7 @@ namespace HangmanGame.Core
 
             try
             {
-                audioFile = new AudioFileReader($"Sounds/{soundFileName}.wav")
+                audioFile = new AudioFileReader($"Assets/Sounds/{soundFileName}.wav")
                 {
                     Volume = settings.Volume / 10f // for example  0-10 will be 0.0-0.10
                 };
