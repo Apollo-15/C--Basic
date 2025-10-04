@@ -136,7 +136,8 @@ namespace HangmanGame.Core
                         System.Environment.Exit(0);
                         break;
                     default:
-                        System.Console.WriteLine("Invalid choice. Please enter 1, 2 or 3.");
+                        System.Console.WriteLine("Invalid choice. Enter 1, 2 or 3.");
+                        action = resultManager.GetNextAction();
                         break;
                 }
             }
