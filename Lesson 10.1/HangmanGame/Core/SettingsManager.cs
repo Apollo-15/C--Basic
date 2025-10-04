@@ -80,7 +80,7 @@ namespace HangmanGame.Core
                     OpenMenu();
                     break;
                 case "2":
-                    settings.Difficulty = DifficultLevel.Medium;
+                    settings.Difficulty = DifficultLevel.Normal;
                     settings.MinLength = 5;
                     settings.MaxLength = 10;
                     settings.MaxAttempts = 6;

@@ -1,12 +1,21 @@
 using System;
+using HangmanGame.Models;
 
 namespace HangmanGame.Graphics
 {
     public class HangmanGraphics
     {
-        private readonly string[] stages = new string[]
+
+        private readonly List<string[]> stagesByDifficulty;
+        private readonly string[] easyStages;
+        private readonly string[] normalStages;
+        private readonly string[] hardStages;
+
+        public HangmanGraphics()
         {
-            @"
+            easyStages = new string[]
+            {
+                @"
                         
 
             
@@ -369,11 +378,34 @@ namespace HangmanGame.Graphics
   / /‖  ‖\ \                                ╚══╗
  / / ‖  ‖ \ \                                  ╚══╗
 ⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺
-            "
-        };
+                "
+            };
 
-        public void Draw(int remainingAttempts)
+            normalStages = new string[]
+            {
+                easyStages[0],
+                easyStages[2],
+                easyStages[4],
+                easyStages[6],
+                easyStages[8],
+                easyStages[10],
+                easyStages[easyStages.Length - 1]
+            };
+
+            hardStages = new string[]
+            {
+                easyStages[0],
+                easyStages[easyStages.Length / 2],
+                easyStages[easyStages.Length -1]
+            };
+
+            stagesByDifficulty = new List<string[]> { easyStages, normalStages, hardStages };
+        }
+
+        public void Draw(int remainingAttempts, DifficultLevel difficulty)
         {
+            string[] stages = stagesByDifficulty[(int)difficulty];
+
             int index = stages.Length - remainingAttempts - 1;
 
             if (index < 0)
@@ -384,8 +416,23 @@ namespace HangmanGame.Graphics
             {
                 index = stages.Length - 1;
             }
-            
+
             System.Console.WriteLine(stages[index]);
+        }
+
+        public int GetMaxAttempts(DifficultLevel difficulty)
+        {
+            switch (difficulty)
+            {
+                case DifficultLevel.Easy:
+                    return easyStages.Length;
+                case DifficultLevel.Normal:
+                    return normalStages.Length;
+                case DifficultLevel.Hard:
+                    return hardStages.Length;
+                default:
+                    return easyStages.Length;
+            }
         }
     }
 }

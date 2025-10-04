@@ -1,5 +1,6 @@
 using System;
 using HangmanGame.Core;
+using HangmanGame.Models;
 
 namespace HangmanGame.Graphics
 {
@@ -16,16 +17,18 @@ namespace HangmanGame.Graphics
             this.wordUI = wordUI;
         }
 
-        public void Render(string wordState, int remainingAttempts, Dictionary<char, string> letterStates, TimerManager timer)
+        public void Render(string word, int remainingAttempts, Dictionary<char, string> letterStates, TimerManager timer, List<char> guessedLetters, string category, DifficultLevel difficulty)
         {
             System.Console.Clear();
 
             System.Console.ForegroundColor = System.ConsoleColor.Cyan;
-            System.Console.WriteLine($"Word: {wordState}    Time: {timer.GetFormattedTime()}");
+            System.Console.WriteLine($"Time: {timer.GetFormattedTime()}    ");
             System.Console.ResetColor();
             System.Console.WriteLine();
 
-            hangmanGraphics.Draw(remainingAttempts);
+            wordUI.Draw(word, guessedLetters, category);
+
+            hangmanGraphics.Draw(remainingAttempts, difficulty);
             System.Console.WriteLine();
 
             keyboardUI.Draw(letterStates);

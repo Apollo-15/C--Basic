@@ -23,6 +23,7 @@ namespace HangmanGame.Core
         private readonly FrameRenderer frameRenderer;
         private readonly TimerManager timer;
         private readonly Dictionary<char, string> letterStates = new();
+        private readonly HangmanGraphics hangman;
 
         public GameManager(SoundManager soundManager, Settings settings)
         {
@@ -34,14 +35,15 @@ namespace HangmanGame.Core
             var wordUI = new WordUI();
             var hangman = new HangmanGraphics();
 
-            this.frameRenderer = new FrameRenderer(hangman, keyboard, wordUI);
+            this.hangman = new HangmanGraphics();
+            this.frameRenderer = new FrameRenderer(this.hangman, keyboard, wordUI);
         }
 
         public void StartGame()
         {
             System.Console.Clear();
             guessedLetters = new List<char>();
-            remainingAttempts = settings.MaxAttempts;
+            remainingAttempts = hangman.GetMaxAttempts(settings.Difficulty);
             isGameOver = false;
 
             CategoryMenu();
@@ -62,8 +64,7 @@ namespace HangmanGame.Core
             while (!isGameOver)
             {
                 string wordState = new string(word.Select(c => guessedLetters.Contains(char.ToUpper(c)) ? c : '_').ToArray());
-                frameRenderer.Render(wordState, remainingAttempts, letterStates, timer);
-
+                frameRenderer.Render(wordState, remainingAttempts, letterStates, timer, guessedLetters, category, settings.Difficulty);
                 System.Console.Write("Enter the letter: ");
                 var input = System.Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(input))

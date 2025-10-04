@@ -6,7 +6,7 @@ namespace HangmanGame.Graphics
 {
     public class WordUI
     {
-        public void Draw(string word, List<char> guessedLetters)
+        public void Draw(string word, List<char> guessedLetters, string category)
         {
             System.Console.ForegroundColor = ConsoleColor.Blue;
             System.Console.WriteLine("\n===============Word==to==guess===============\n");
@@ -14,8 +14,8 @@ namespace HangmanGame.Graphics
             string display = "";
             foreach (char c in word)
             {
-                display += guessedLetters.Contains(char.ToUpper(c)) || guessedLetters.Contains(char.ToLower(c)) 
-                    ? c + " " 
+                display += guessedLetters.Contains(char.ToUpper(c)) || guessedLetters.Contains(char.ToLower(c))
+                    ? c + " "
                     : "_ ";
             }
             display = display.TrimEnd();
@@ -32,7 +32,10 @@ namespace HangmanGame.Graphics
             System.Console.Write(new string('═', length));
             System.Console.WriteLine("╝");
             System.Console.ResetColor();
-            System.Console.WriteLine();
+
+            System.Console.ForegroundColor = ConsoleColor.Blue;
+            System.Console.WriteLine($"\nCategory: {category}");
+            System.Console.ResetColor();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace HangmanGame.Models
 
         public Settings()
         {
-            Difficulty = DifficultLevel.Medium;
+            Difficulty = DifficultLevel.Normal;
             MinLength = 5;
             MaxLength = 10;
             MaxAttempts = 6;
@@ -26,7 +26,7 @@ namespace HangmanGame.Models
     public enum DifficultLevel
     {
         Easy,
-        Medium,
+        Normal,
         Hard
     }
 
