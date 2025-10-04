@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HangmanGame.Data;
+using HangmanGame.Menu;
 using HangmanGame.Models;
 using HangmanGame.Graphics;
 
@@ -86,30 +87,52 @@ namespace HangmanGame.Core
                 {
                     letterStates[ToGuess] = "correct";
                     soundManager.PlayCorrectLetter();
-
-                    if (word.All(c => guessedLetters.Contains(Char.ToUpper(c))))
-                    {
-                        frameRenderer.Render(wordState, remainingAttempts, letterStates, timer, guessedLetters, category, settings.Difficulty);
-                        isGameOver = true;
-                        System.Console.WriteLine($"You win! Word was: {word}");
-                    }
                 }
                 else
                 {
                     letterStates[ToGuess] = "wrong";
                     remainingAttempts--;
                     soundManager.PlayWrongLetter();
+                }
 
-                    frameRenderer.Render(wordState, remainingAttempts, letterStates, timer, guessedLetters, category, settings.Difficulty);
+                if (word.All(c => guessedLetters.Contains(Char.ToUpper(c))) || remainingAttempts <= 0)
+                {
+                    isGameOver = true;
 
-                    if (remainingAttempts <= 0)
-                    {
-                        isGameOver = true;
-                        System.Console.WriteLine($"You lose. Word was: {word}");
-                    }
+                    string finalWordState = new string(word.Select(c => guessedLetters.Contains(char.ToUpper(c)) ? c : '_').ToArray());
+                    frameRenderer.Render(finalWordState, remainingAttempts, letterStates, timer, guessedLetters, category, settings.Difficulty);
                 }
             }
+
             timer.Stop();
+
+            ResultManager resultManager = new ResultManager();
+            resultManager.ShowResult(word, guessedLetters, remainingAttempts, timer, settings.Difficulty);
+
+            bool validChoice = false;
+            while (!validChoice)
+            {
+                string action = resultManager.GetNextAction();
+                switch (action)
+                {
+                    case "1":
+                        validChoice = true;
+                        MenuManager menu = new MenuManager(soundManager, settings);
+                        menu.ShowMainMenu();
+                        break;
+                    case "2":
+                        validChoice = true;
+                        StartGame();
+                        break;
+                    case "3":
+                        validChoice = true;
+                        System.Environment.Exit(0);
+                        break;
+                    default:
+                        System.Console.WriteLine("Invalid choice. Please enter 1, 2 or 3.");
+                        break;
+                }
+            }
         }
 
         public void CategoryMenu()
