@@ -86,9 +86,10 @@ namespace HangmanGame.Core
                 {
                     letterStates[ToGuess] = "correct";
                     soundManager.PlayCorrectLetter();
-                    
+
                     if (word.All(c => guessedLetters.Contains(Char.ToUpper(c))))
                     {
+                        frameRenderer.Render(wordState, remainingAttempts, letterStates, timer, guessedLetters, category, settings.Difficulty);
                         isGameOver = true;
                         System.Console.WriteLine($"You win! Word was: {word}");
                     }
@@ -98,7 +99,9 @@ namespace HangmanGame.Core
                     letterStates[ToGuess] = "wrong";
                     remainingAttempts--;
                     soundManager.PlayWrongLetter();
-                    
+
+                    frameRenderer.Render(wordState, remainingAttempts, letterStates, timer, guessedLetters, category, settings.Difficulty);
+
                     if (remainingAttempts <= 0)
                     {
                         isGameOver = true;
