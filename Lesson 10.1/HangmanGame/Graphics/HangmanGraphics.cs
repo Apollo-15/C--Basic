@@ -183,8 +183,8 @@ namespace HangmanGame.Graphics
      ‖  ‖  / /            
      ‖  ‖ / /             
      ‖  ‖/ /           ╔══════╗
-     ‖  ‖ /            ‖⦿ ᠌ ᠌⦿‖
-     ‖  ‖/             ‖ ᠌ ᠌⌣  ᠌‖
+     ‖  ‖ /            ‖ ⦿ ᠌ ᠌⦿ ‖
+     ‖  ‖/             ‖ ᠌ ᠌ ⌣  ᠌‖
      ‖  ‖              ╚═╦══╦═╝
      ‖  ‖                ‖  ‖
      ‖  ‖                ‖  ‖
@@ -211,8 +211,8 @@ namespace HangmanGame.Graphics
      ‖  ‖  / /            
      ‖  ‖ / /             
      ‖  ‖/ /           ╔══════╗
-     ‖  ‖ /            ‖⦿ ᠌ ᠌⦿‖
-     ‖  ‖/             ‖ ᠌ ᠌⌣  ᠌‖
+     ‖  ‖ /            ‖ ⦿ ᠌ ᠌⦿ ‖
+     ‖  ‖/             ‖ ᠌ ᠌ ⌣  ᠌‖
      ‖  ‖              ╚═╦══╦═╝
      ‖  ‖              //‖  ‖\\
      ‖  ‖             // ‖  ‖ \\
@@ -239,8 +239,8 @@ namespace HangmanGame.Graphics
      ‖  ‖  / /            
      ‖  ‖ / /             
      ‖  ‖/ /           ╔══════╗
-     ‖  ‖ /            ‖⦿ ᠌ ᠌⦿‖
-     ‖  ‖/             ‖ ᠌ ᠌⌣  ᠌‖
+     ‖  ‖ /            ‖ ⦿ ᠌ ᠌⦿ ‖
+     ‖  ‖/             ‖ ᠌ ᠌ ⌣  ᠌‖
      ‖  ‖              ╚═╦══╦═╝
      ‖  ‖              //‖  ‖\\
      ‖  ‖             // ‖  ‖ \\
@@ -267,8 +267,8 @@ namespace HangmanGame.Graphics
      ‖  ‖  / /            
      ‖  ‖ / /             
      ‖  ‖/ /           ╔══════╗
-     ‖  ‖ /            ‖⦿ ᠌ ᠌⦿‖
-     ‖  ‖/             ‖ ᠌ ᠌⌣  ᠌‖
+     ‖  ‖ /            ‖ ⦿ ᠌ ᠌⦿ ‖
+     ‖  ‖/             ‖ ᠌ ᠌ ⌣  ᠌‖
      ‖  ‖              ╚═╦══╦═╝
      ‖  ‖              //‖  ‖\\
      ‖  ‖             // ‖  ‖ \\
@@ -295,8 +295,8 @@ namespace HangmanGame.Graphics
      ‖  ‖  / /            ┃
      ‖  ‖ / /             
      ‖  ‖/ /           ╔══════╗
-     ‖  ‖ /            ‖⦿ ᠌ ᠌⦿‖
-     ‖  ‖/             ‖ ᠌ ᠌⌢  ᠌‖
+     ‖  ‖ /            ‖ ⦿ ᠌ ᠌⦿ ‖
+     ‖  ‖/             ‖ ᠌ ᠌ ⌢  ᠌‖
      ‖  ‖              ╚═╦══╦═╝
      ‖  ‖              //‖  ‖\\
      ‖  ‖             // ‖  ‖ \\
@@ -323,8 +323,8 @@ namespace HangmanGame.Graphics
      ‖  ‖  / /            ┃
      ‖  ‖ / /             ┃
      ‖  ‖/ /           ╔══╧═══╗
-     ‖  ‖ /            ‖⊚ ᠌ ᠌⊚‖
-     ‖  ‖/             ‖ ᠌ ᠌⌢  ᠌‖
+     ‖  ‖ /            ‖ ⊚ ᠌ ᠌⊚ ‖
+     ‖  ‖/             ‖ ᠌ ᠌ ⌢  ᠌‖
      ‖  ‖              ╚═╦══╦═╝
      ‖  ‖              //‖  ‖\\
      ‖  ‖             // ‖  ‖ \\
@@ -351,8 +351,8 @@ namespace HangmanGame.Graphics
      ‖  ‖  / /            ┃
      ‖  ‖ / /             ┃
      ‖  ‖/ /           ╔══╧═══╗
-     ‖  ‖ /            ‖⨷ ᠌ ᠌⨷‖
-     ‖  ‖/             ‖ ᠌ ᠌⎯⎯  ᠌‖
+     ‖  ‖ /            ‖ ⨷ ᠌ ᠌⨷ ‖
+     ‖  ‖/             ‖ ᠌ ᠌ ⎯⎯  ᠌‖
      ‖  ‖              ╚═╦══╦═╝
      ‖  ‖              ││‖  ‖││
      ‖  ‖              ││‖  ‖││
@@ -372,18 +372,20 @@ namespace HangmanGame.Graphics
             "
         };
 
-        public void Draw(int wrongAttempts)
+        public void Draw(int remainingAttempts)
         {
-            if (wrongAttempts < 0)
-                wrongAttempts = 0;
-            if (wrongAttempts >= stages.Length)
-                wrongAttempts = stages.Length - 1;
+            int index = stages.Length - remainingAttempts - 1;
+
+            if (index < 0)
+            {
+                index = 0;
+            }
+            if (index >= stages.Length)
+            {
+                index = stages.Length - 1;
+            }
             
-            if (wrongAttempts == stages.Length - 1)
-                System.Console.ForegroundColor = ConsoleColor.Red;
-            
-            System.Console.WriteLine(stages[wrongAttempts]);
-            System.Console.ResetColor();
+            System.Console.WriteLine(stages[index]);
         }
     }
 }
