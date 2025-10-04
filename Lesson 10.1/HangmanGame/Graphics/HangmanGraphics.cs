@@ -164,8 +164,8 @@ namespace HangmanGame.Graphics
      ‖  ‖  / /            
      ‖  ‖ / /             
      ‖  ‖/ /           ╔══════╗
-     ‖  ‖ /            ‖⦿ ᠌ ᠌⦿‖
-     ‖  ‖/             ‖ ᠌ ᠌⌣  ᠌‖
+     ‖  ‖ /            ‖ ⦿ ᠌ ᠌⦿ ‖
+     ‖  ‖/             ‖ ᠌ ᠌ ⌣  ᠌‖
      ‖  ‖              ╚══════╝
      ‖  ‖               
      ‖  ‖               
@@ -361,7 +361,7 @@ namespace HangmanGame.Graphics
      ‖  ‖ / /             ┃
      ‖  ‖/ /           ╔══╧═══╗
      ‖  ‖ /            ‖ ⨷ ᠌ ᠌⨷ ‖
-     ‖  ‖/             ‖ ᠌ ᠌ ⎯⎯  ᠌‖
+     ‖  ‖/             ‖ ᠌ ᠌⎯⎯  ‖
      ‖  ‖              ╚═╦══╦═╝
      ‖  ‖              ││‖  ‖││
      ‖  ‖              ││‖  ‖││
@@ -395,7 +395,8 @@ namespace HangmanGame.Graphics
             hardStages = new string[]
             {
                 easyStages[0],
-                easyStages[easyStages.Length / 2],
+                easyStages[easyStages.Length / 3],
+                easyStages[2 * easyStages.Length / 3],
                 easyStages[easyStages.Length -1]
             };
 
@@ -425,13 +426,13 @@ namespace HangmanGame.Graphics
             switch (difficulty)
             {
                 case DifficultLevel.Easy:
-                    return easyStages.Length;
+                    return easyStages.Length - 1;
                 case DifficultLevel.Normal:
-                    return normalStages.Length;
+                    return normalStages.Length - 1;
                 case DifficultLevel.Hard:
-                    return hardStages.Length;
+                    return hardStages.Length - 1;
                 default:
-                    return easyStages.Length;
+                    return easyStages.Length - 1;
             }
         }
     }

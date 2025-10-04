@@ -14,8 +14,6 @@ namespace HangmanGame.Graphics
 
         public void Draw(Dictionary<char, string> letterStates)
         {
-            System.Console.WriteLine();
-
             for (int row = 0; row < keyboard.Length; row++)
             {
                 string[] letters = keyboard[row];
@@ -39,8 +37,6 @@ namespace HangmanGame.Graphics
                 System.Console.WriteLine(offSet + mid);
                 System.Console.WriteLine(offSet + bot);
             }
-
-            System.Console.WriteLine();
         }
 
         private string GetColorForLetter(char letter, Dictionary<char, string> states)
