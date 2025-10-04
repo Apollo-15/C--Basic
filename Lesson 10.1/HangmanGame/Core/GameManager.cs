@@ -62,6 +62,11 @@ namespace HangmanGame.Core
 
         public void RunGameLoop()
         {
+            guessedLetters = new List<char>();
+            letterStates.Clear();
+            remainingAttempts = hangman.GetMaxAttempts(settings.Difficulty);
+            isGameOver = false;
+
             while (!isGameOver)
             {
                 string wordState = new string(word.Select(c => guessedLetters.Contains(char.ToUpper(c)) ? c : '_').ToArray());
@@ -122,6 +127,8 @@ namespace HangmanGame.Core
                         break;
                     case "2":
                         validChoice = true;
+                        guessedLetters = new List<char>();
+                        letterStates.Clear();
                         StartGame();
                         break;
                     case "3":

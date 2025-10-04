@@ -11,7 +11,6 @@ namespace HangmanGame
         {
             TimeSpan duration = timer.GetElapsed();
 
-            System.Console.Clear();
             System.Console.ForegroundColor = System.ConsoleColor.Magenta;
             System.Console.WriteLine("\n==============================");
             System.Console.WriteLine("        GAME STATISTICS");
