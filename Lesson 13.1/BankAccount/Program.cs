@@ -6,14 +6,14 @@ namespace BankAccount
     {
         public static void Main(string[] args)
         {
-            Account heikkisAccount = new Account("Heikki's account", 100.00);
-            Account heikkisSwissAccount = new Account("Heikki's account in Switzerland", 1000000.00);
+            Account heikkisAccount = new Account("Heikki's account", 100.00m);
+            Account heikkisSwissAccount = new Account("Heikki's account in Switzerland", 1000000.00m);
 
+            heikkisAccount.Withdrawal(20m);
+            Console.WriteLine($"The balance of Heikki's account is now: {heikkisAccount.Balance:F2}");
 
-            heikkisAccount.Withdrawal(20);
-            System.Console.WriteLine("The balance of Heikki's account is now: " + heikkisAccount.Balance);
-            heikkisSwissAccount.Deposit(200);
-            System.Console.WriteLine("The balance of Heikki's other account is now: " + heikkisSwissAccount.Balance);
+            heikkisSwissAccount.Deposit(200m);
+            Console.WriteLine($"The balance of Heikki's other account is now: {heikkisSwissAccount.Balance:F2}");
         }
     }
 }

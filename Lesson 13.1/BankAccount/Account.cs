@@ -5,9 +5,9 @@ namespace BankAccount
     public class Account
     {
         private string name;
-        private double balance;
+        private decimal balance;
 
-        public Account(string name, double userBalance)
+        public Account(string name, decimal userBalance)
         {
             this.name = name;
             this.balance = userBalance;
@@ -17,25 +17,36 @@ namespace BankAccount
         {
             get { return name; }
         }
-        public double Balance
+        public decimal Balance
         {
             get { return balance; }
         }
 
-        public void Deposit(double amount)
+        public void Deposit(decimal amount)
         {
+            if (amount <= 0)
+            {
+                System.Console.WriteLine("Deposit amount must be positive!");
+                return;
+            }
             balance += amount;
         }
 
-        public void Withdrawal(double amount)
+        public void Withdrawal(decimal amount)
         {
+            if (amount <= 0)
+            {
+                System.Console.WriteLine("Withdrawal amount must be positive!");
+                return;
+            }
+
             if (amount <= balance)
             {
                 balance -= amount;
             }
             else
             {
-                System.Console.WriteLine("Not enogh money!");
+                System.Console.WriteLine("Not enough money!");
             }
         }
     }
